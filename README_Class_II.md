@@ -5,7 +5,7 @@ R scripts for the analysis of HLA peptide-binding motifs (PBM) to characterize t
 
 This workflow analyzes HLA class II peptide datasets derived from the supplementary materials of Stražar et al. (DOI: 10.1016/j.immuni.2023.05.009) and Racle et al. (DOI: 10.1016/j.immuni.2023.03.009), as well as the [NetMHCIIpan-4.3 webserver](https://services.healthtech.dtu.dk/services/NetMHCIIpan-4.3/) (DOI: 10.1126/sciadv.adj6367). The scripts generate peptide-binding motifs for individual HLA alleles using [MoDec v1.2](https://github.com/GfellerLab/MoDec).
 
-The peptide lists used in the analyses, together with their HLA assignments, are provided in the folder 0-Class_II_input. These files correspond to the input datasets used to generate the results presented in the manuscript.
+The peptide lists used in the analyses, together with their HLA assignments, are provided in the folder `0-Class_II_input`. These files correspond to the input datasets used to generate the results presented in the manuscript.
 
 ### Workflow
 
