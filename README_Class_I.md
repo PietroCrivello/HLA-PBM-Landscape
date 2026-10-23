@@ -13,7 +13,7 @@ The peptide lists used in the analyses, together with their HLA assignments, are
 
 `1_Prepare_Allele_Specific_Peptide_Lists.R`
 
-This script takes a tab-delimited master file containing peptide sequences and their corresponding HLA allele assignments. It removes duplicate rows and exports peptide sequences by allele to individual CSV files.
+This script takes a tab-delimited master file containing peptide sequences and their corresponding HLA allele assignments (datasets in `0-Class_I_datasets`). It removes duplicate rows and exports peptide sequences by allele to individual CSV files.
 
 The resulting output are files named using the format `<allele>_unnested.csv`, which are used as input for the next step.
 
