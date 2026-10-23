@@ -3,7 +3,7 @@ R scripts for the analysis of HLA peptide-binding motifs (PBM) to characterize t
 
 ## Class I: Peptide_to_motifs
 
-This workflow processes HLA class I peptide datasets retrieved from the MHC Motif Atlas (), and generates peptide-binding motifs for individual HLA alleles using MixMHCp ().
+This workflow processes HLA class I peptide datasets retrieved from the MHC Motif Atlas (http://mhcmotifatlas.org/class1, DOI: 10.1093/nar/gkac965), and generates peptide-binding motifs for individual HLA alleles using [MixMHCp (version 2.1)](https://github.com/GfellerLab/MixMHCp).
 
 ### Workflow
 
@@ -11,11 +11,11 @@ This workflow processes HLA class I peptide datasets retrieved from the MHC Moti
 
 `01_Prepare_Allele_Specific_Peptide_Lists.R`
 
-This script takes a tab-delimited master file containing peptide sequences and their corresponding HLA allele assignments. It removes the peptide-length column and duplicate rows, separates peptides by allele, and exports individual CSV files containing the peptide sequences for each allele.
+This script takes a tab-delimited master file containing peptide sequences and their corresponding HLA allele assignments. It removes duplicate rows and exports peptide sequences by allele to individual CSV files.
 
-The resulting files are named using the format `<allele>_unnested.csv` and are used as input for the next step.
+The resulting output are files named using the format `<allele>_unnested.csv`, which are used as input for the next step.
 
-**Input:** Master TSV file containing at least the columns `Peptide`, `Allele`, `Locus`, and `length`.
+**Input:** Tab-delimited master file containing the columns `Peptide`, `Allele`, `Locus`.
 
 **Output:** One CSV file per HLA allele, containing peptide sequences without column headers.
 
