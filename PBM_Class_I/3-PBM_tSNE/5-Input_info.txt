@@ -1,0 +1,2 @@
+PWM	PBM	Cluster
+e.g. A0101	1	1
