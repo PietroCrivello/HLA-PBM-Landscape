@@ -45,15 +45,53 @@ This workflow combines position weight matrices (PWMs) describing the PBM of eac
 
 **Step 3. Merging PWM**
 
-`1_Merging_of_PWMs.R`
+`3_Merging_of_PWMs.R`
 
 This script imports individual motif files and combines their position-specific values into a single matrix, with one column per selected allotype.
 
 **Input:**
-- `1_Input.txt`. A tab-delimited file containing two columns `Folder` and `Name` reporting the path to the directory containing the motif files generated in step 2, and the corresponding allotype name (matching the file name, without .txt extension).
+- `3_Input.txt`. A tab-delimited file containing two columns `Folder` and `Name` reporting the path to the directory containing the motif files generated in step 2, and the corresponding allotype name (matching the file name, without .txt extension).
 - Individual motif files named Name.txt within the corresponding folder.
 
 **Output:**
-- Merged PWMs.txt. A tab-delimited matrix containing the amino-acid position and symbol in the first two columns, followed by one column for each motif reporting the amino acid frequencies.
+- `Merged PWMs.txt`. A tab-delimited matrix containing the amino-acid position and symbol in the first two columns, followed by one column for each motif reporting the amino acid frequencies.
 
-**Step 4. Merging PWM**
+**Step 4. Perform Hierarchical clustering**
+
+`4_PBM_Hierarchical_Clustering.R`
+
+This script calculates correlation-based distances between HLA motifs and performs hierarchical clustering using Ward.D2 linkage. It generates dendrograms and exports the distance matrix and computational cluster assignments.
+
+Defining and visualizing PBM groups:
+The workflow involves two runs of the hierarchical-clustering script.
+Initial clustering and group inspection. Run the script to generate the dendrograms and computational cluster assignments. These clusters provide an initial framework for inspecting similarities between motifs. PBM groups are then reviewed and finalized by manual inspection of the dendrograms and direct comparison of the corresponding motifs. The computational clusters are not necessarily identical to the final PBM groups.
+Visualization of finalized PBM groups. Update the Group column in the annotation file with the manually finalized group assignments and rerun the script. The dendrogram labels and circular group ring are then colored according to these assignments.
+
+**Input:**
+- `Merged PWMs.txt`, generated in Step 3.
+-  `4-Input.txt`, a tab-delimited annotation file containing: 1) `PWM`: motif identifier matching the corresponding column name in the merged matrix. `Group`: PBM group assignment; use 1 for allotypes not yet assigned to a group. `Name`: allele label used in the visualizations.
+
+**Output:**
+- Dendograms: 1) Dendrogram.jpeg, 2)Top_down_Dendrogram.jpeg, 3) combined_circular_dendrogram_ring.png, 4) group_ring_only.png
+- Distance.txt: pairwise correlation-based distances.
+- Alleles_with_clusters.txt: allele annotations with computational cluster assignments.
+- Ordered_Alleles.txt: allele annotations ordered according to the dendrogram.
+
+### Requirements and configuration
+Set path_output to the desired output directory. When set to NULL, outputs are saved to the current working directory.
+
+## Class I: tSNE Visualization
+
+**Step 5. tSNE analysis**
+
+`5_tSNE.R`
+This script generates a two-dimensional t-distributed stochastic neighbor embedding (t-SNE) visualization of HLA peptide-binding motifs. Samples can be colored according to either their assigned peptide-binding motif (PBM) group or their computationally determined clusters.
+Before running, configure the plot_type variable (PBM or Cluster) for the color assignment.
+
+**Input:**
+- `Merged PWMs.txt`, generated in Step 3.
+- `5-Input.txt`, a tab-delimited annotation file containing: 1)`PWM`, identifier of the PWM included in the `Merged PWMs.txt` file, 2) `PBM`, manually annotated PBM group assignement, 3) `Cluster`, computationally assigned clusters from the analysis in step 4.
+
+**Output:**
+The script generates a JPEG figure named according to the selected group type: `tsne_plot_by_sample_PBM.jpeg` or `tsne_plot_by_sample_Cluster.jpeg`
+
