@@ -4,7 +4,8 @@ R scripts for the analysis of HLA peptide-binding motifs (PBM) to characterize t
 ## Class I: Peptide_to_motifs
 
 This workflow processes HLA class I peptide datasets retrieved from the MHC Motif Atlas (http://mhcmotifatlas.org/class1, DOI: 10.1093/nar/gkac965), and generates peptide-binding motifs for individual HLA alleles using [MixMHCp (version 2.1)](https://github.com/GfellerLab/MixMHCp).
-The list of peptides used in this analysis and their HLA assignment is provided under the folder `0-Class_I_datasets`.
+
+The peptide lists used in the analyses, together with their HLA assignments, are provided in the folder `0-Class_I_datasets`. These files correspond to the input datasets used to generate the results presented in the manuscript.
 
 ### Workflow
 
