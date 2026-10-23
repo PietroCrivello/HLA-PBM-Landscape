@@ -32,7 +32,7 @@ This script processes the allele-specific peptide lists generated in Step 1. Eac
 ### Requirements
 
 - MixMHCp must be installed separately. Follow the installation instructions provided by the [MixMHCp developers](https://github.com/GfellerLab/MixMHCp).
-Before running the script, configure the paths to the MixMHCp executable, input folder and output folder. The lib bias_phospho.txt file may be required.
+Before running the script, configure the paths to the MixMHCp executable, input folder and output folder. The script also requires the bias_phospho.txt file included in the MixMHCp installation, with its path configured accordingly.
  
 ### Notes
 The peptide lists must already contain allele assignments. This workflow reorganizes the input data but does not infer HLA restriction from unassigned master peptide list.
