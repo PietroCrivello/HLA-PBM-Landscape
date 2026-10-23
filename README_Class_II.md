@@ -5,7 +5,7 @@ R scripts for the analysis of HLA peptide-binding motifs (PBM) to characterize t
 
 This workflow analyzes HLA class II peptide datasets derived from the supplementary materials of Stražar et al. (DOI: 10.1016/j.immuni.2023.05.009) and Racle et al. (DOI: 10.1016/j.immuni.2023.03.009), as well as the [NetMHCIIpan-4.3 webserver](https://services.healthtech.dtu.dk/services/NetMHCIIpan-4.3/) (DOI: 10.1126/sciadv.adj6367). The scripts generate peptide-binding motifs for individual HLA alleles using [MoDec v1.2](https://github.com/GfellerLab/MoDec).
 
-The peptide lists used in the analyses, together with their HLA assignments, are provided in the folder `0-Class_II_input`. These files correspond to the input datasets used to generate the results presented in the manuscript.
+The peptide lists used in the analyses, together with their HLA assignments, are provided in the folder `0-Class_II_datasets`. These files correspond to the input datasets used to generate the results presented in the manuscript.
 
 ### Workflow
 
@@ -13,31 +13,41 @@ The peptide lists used in the analyses, together with their HLA assignments, are
 
 `1_Peptides_to_allele_peptide_lists.R`
 
-This script takes a tab-delimited master file containing peptide sequences and their corresponding HLA allele assignments (datasets in `0-Class_II_input`). It removes duplicate rows and exports peptide sequences by allele to individual CSV files.
+This script takes a tab-delimited master file containing peptide sequences and their corresponding HLA allele assignments (datasets in `0-Class_II_datasets`). It removes duplicate rows and exports peptide sequences by allele to individual CSV files.
 
 The resulting output are files named using the format `<allele>_unnested.csv`, which are used as input for the next step.
 
-**Input:** Tab-delimited master file containing the columns `Peptide`, `Allele`, `Locus`.
+**Input:** Tab-delimited master file containing the columns `Peptide`, `Allele`.
 
 **Output:** One CSV file per HLA allele, containing peptide sequences without column headers.
 
-**Step 2. Generate peptide-binding motifs using MixMHCp**
+**Step 2. Generate peptide-binding motifs using MoDec**
 
-`2_Run_MixMHCp.R`
+`2_Run_MODEC.R`
 
-This script processes the allele-specific peptide lists generated in Step 1. Each input file is processed independently using MixMHCp to generate peptide-binding motif outputs.
+This script runs MoDec v1.2 on the allele-specific peptide lists generated in Step 1. Each input file is processed independently, and the output is saved in separate output folders.
 
-**Input:** CSV files generated in Step 1.
+**Input:**
+- CSV files named <allele>_unnested.csv, generated in Step 1.
 
-**Output:** MixMHCp output files for each input peptide list.
+**Analysis parameters:**
+--Kmax 5: sets the maximum number of clusters to 5.
+--MHC2: enables HLA class II analysis.
+--nruns 10: specifies 10 runs.
+--makeReport: requests report generation.
+--outAdd: enables the corresponding MoDec output option.
 
-### Requirements
+**Input:**
+- MODEC output files saved in the specified output directories. The output filename is based on the input filename, with _output.txt appended to its basename.
 
-- MixMHCp must be installed separately. Follow the installation instructions provided by the [MixMHCp developers](https://github.com/GfellerLab/MixMHCp).
-Before running the script, configure the paths to the MixMHCp executable, input folder and output folder. The script also requires the bias_phospho.txt file included in the MixMHCp installation, with its path configured accordingly.
- 
-### Notes
-The peptide lists must already contain allele assignments. This workflow reorganizes the input data but does not infer HLA restriction from unassigned master peptide list.
+**Parallel processing:** 
+The script uses the R packages future and furrr to process multiple input files in parallel, with up to six workers configured by plan(multisession, workers = 6).
+
+**Requirements:** 
+- MoDec v1.2 executable (MoDec.exe), to be installed separately. Follow the installation instructions provided by the [MoDec developers](https://github.com/GfellerLab/MoDec).
+
+Before running the scripts, update the input and output directory paths in 2_Run_MODEC.R to match your local environment. Ensure that the MoDec executable is accessible to the script.
+
 
 ## Class I: PBM_clustering
 
