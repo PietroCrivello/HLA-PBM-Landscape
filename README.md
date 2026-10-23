@@ -23,7 +23,7 @@ The resulting output are files named using the format `<allele>_unnested.csv`, w
 
 `02_Run_MixMHCp.R`
 
-This script processes the allele-specific peptide-list files generated in Step 1. Each file is processed independently using MixMHCp to generate peptide-binding motif predictions.
+This script processes the allele-specific peptide lists generated in Step 1. Each input file is processed independently using MixMHCp to generate peptide-binding motif outputs.
 
 **Input:** CSV files generated in Step 1.
 
@@ -31,11 +31,10 @@ This script processes the allele-specific peptide-list files generated in Step 1
 
 ### Requirements
 
-- R and the R packages `readr` and `tidyverse`.
-- MixMHCp installed and accessible to the script. Follow the installation instructions provided by the [MixMHCp developers](https://github.com/GfellerLab/MoDec) only if that is the actual software distribution you used; otherwise, replace this link with the appropriate MixMHCp documentation.
-
+- MixMHCp must be installed separately. Follow the installation instructions provided by the [MixMHCp developers](https://github.com/GfellerLab/MixMHCp).
+Before running the script, configure the paths to the MixMHCp executable, input folder and output folder. The lib bias_phospho.txt file may be required.
+ 
 ### Notes
-
-The peptide lists must already contain allele assignments. The preprocessing script reorganizes the input data but does not infer HLA restriction or generate peptide sequences.
+The peptide lists must already contain allele assignments. This workflow reorganizes the input data but does not infer HLA restriction from unassigned master peptide list.
 
 
