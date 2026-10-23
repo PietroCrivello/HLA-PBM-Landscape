@@ -9,7 +9,7 @@ This workflow processes HLA class I peptide datasets retrieved from the MHC Moti
 
 **Step 1. Prepare allele-specific peptide lists**
 
-`01_Prepare_Allele_Specific_Peptide_Lists.R`
+`1_Prepare_Allele_Specific_Peptide_Lists.R`
 
 This script takes a tab-delimited master file containing peptide sequences and their corresponding HLA allele assignments. It removes duplicate rows and exports peptide sequences by allele to individual CSV files.
 
@@ -21,7 +21,7 @@ The resulting output are files named using the format `<allele>_unnested.csv`, w
 
 **Step 2. Generate peptide-binding motifs using MixMHCp**
 
-`02_Run_MixMHCp.R`
+`2_Run_MixMHCp.R`
 
 This script processes the allele-specific peptide lists generated in Step 1. Each input file is processed independently using MixMHCp to generate peptide-binding motif outputs.
 
@@ -37,4 +37,23 @@ Before running the script, configure the paths to the MixMHCp executable, input 
 ### Notes
 The peptide lists must already contain allele assignments. This workflow reorganizes the input data but does not infer HLA restriction from unassigned master peptide list.
 
+## Class I: PBM_clustering
 
+This workflow combines position weight matrices (PWMs) describing the PBM of each class I allotype, performs hierarchical clustering based on motif similarity, and visualizes the relationships between allotypes and their PBM.
+
+### Workflow
+
+**Step 3. Merging PWM**
+
+`1_Merging_of_PWMs.R`
+
+This script imports individual motif files and combines their position-specific values into a single matrix, with one column per selected allotype.
+
+**Input:**
+- `1_Input.txt`. A tab-delimited file containing two columns `Folder` and `Name` reporting the path to the directory containing the motif files generated in step 2, and the corresponding allotype name (matching the file name, without .txt extension).
+- Individual motif files named Name.txt within the corresponding folder.
+
+**Output:**
+- Merged PWMs.txt. A tab-delimited matrix containing the amino-acid position and symbol in the first two columns, followed by one column for each motif reporting the amino acid frequencies.
+
+**Step 4. Merging PWM**
