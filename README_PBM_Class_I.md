@@ -45,9 +45,38 @@ This workflow combines position weight matrices (PWMs) describing the PBM of eac
 
 ### Workflow
 
-**Step 3. Merging PWM**
+**Step 3a. Generate KLD summary**
 
-`3_Merging_of_PWMs.R`
+`3a_KLD_summary.R`
+
+This script collects Kullback–Leibler divergence (KLD) values from MixMHCp output folders for individual HLA class I allotypes and generates a summary file to support the subsequent selection of Position Weighted Matrices (PWM) to be analyzed by clustering.
+
+The script is meant to work inside the folder where all MixMHCp outputs were collected. It searches the selected directory for allotype-specific output folders and reads the KLD/best_ncl.txt file from each folder. It extracts the values in the second column and identifies the position of the maximum KLD value for each allele. Based on this position, the script generates the corresponding PWM identifiers.
+
+The output is a summary table intended to support subsequent manual review and selection of the final PWMs.
+
+**Input:**
+- select the folder containing the output of MixMHCp.
+
+**Output:**
+
+- A tab-delimited file named `<folder_name>_KLD_summary.txt`, saved in the selected input directory. The output contains the allele names, the extracted KLD values, the position of the maximum KLD value (Max), and the corresponding PWM identifiers (PWM_IDs).
+
+**Step 3b. Extract and rename final PWM files**
+
+`3b_Collect_Selected_PWMs.R`
+
+This script collects selected PWMs from MixMHCp output folders based on the KLD summary file generated above. For each entry in the input file, it locates the corresponding PWM file in the allotype-specific output directory, copies it to a dedicated output folder, and renames it using the corresponding HLA allele name.
+
+**Input:**
+- output file of Step 3a.
+
+**Output:**
+- A directory containing the selected PWM files, renamed according to their HLA allele names (e.g., <Allele>.txt). The output directory is created in the current working directory, using the name of the input folder with outputs replaced by PWM.
+
+**Step 3c. Merging PWM**
+
+`3c_Merging_of_PWMs.R`
 
 This script imports individual motif files and combines their position-specific values into a single matrix, with one column per selected allotype.
 
