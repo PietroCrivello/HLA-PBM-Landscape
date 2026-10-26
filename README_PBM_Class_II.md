@@ -165,7 +165,7 @@ This script calculates pairwise peptide overlap between HLA allotypes based on t
 Pairwise overlap is calculated using the Sørensen–Dice coefficient. Peptide-length restriction can optionally be enabled to include only peptides within a specified length range.
 
 **Input:**
-- `peptides_lists_merged.txt` generated in step 6b.
+- `peptide_lists_merged.txt` generated in step 6b.
 - `6c_Input.txt`, overview table containing the following columns: 1) `Name`: allotype identifiers matching the column names in the merged peptide table. 2) `Group`: group assignments used to classify pairwise comparisons as within-group or across-group.
 
 Configuration:
