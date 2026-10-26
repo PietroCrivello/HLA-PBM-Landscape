@@ -81,7 +81,7 @@ This script collects selected PWMs from MixMHCp output folders based on the KLD 
 This script imports individual motif files and combines their position-specific values into a single matrix, with one column per selected allotype.
 
 **Input:**
-- `3_Input.txt`. A tab-delimited file containing two columns `Folder` and `Name` reporting the path to the directory containing the motif files generated in step 2, and the corresponding allotype name (matching the file name, without .txt extension).
+- `3c_Input.txt`. A tab-delimited file containing two columns `Folder` and `Name` reporting the path to the directory containing the motif files generated in step 2, and the corresponding allotype name (matching the file name, without .txt extension).
 - Individual motif files named Name.txt within the corresponding folder.
 
 **Output:**
