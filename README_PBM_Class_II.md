@@ -126,7 +126,7 @@ The script generates a JPEG and SVG figures named according to the selected grou
 
 ## Class II: Immunopeptidome overlap
 
-This workflow uses the peptide analysis performed with mixMHCp (Step 2) to retrieve peptide lists and compare immunopeptidome across allotypes. The first script merges the peptide lists, while the second script performs pairwise overlap comparisons.
+This workflow uses the peptide analysis performed with MoDec (Step 2) to retrieve peptide lists and compare immunopeptidome across allotypes. The first script merges the peptide lists, while the second script performs pairwise overlap comparisons.
 
 **Step 6a. Immunopeptidome overlap analysis**
 
