@@ -123,6 +123,8 @@ Before running, configure the plot_type variable (PBM or Cluster) for the color 
 - `Merged PWMs.txt`, generated in Step 3.
 - `5-Input.txt`, a tab-delimited annotation file containing: 1)`PWM`, identifier of the PWM included in the `Merged PWMs.txt` file, 2) `PBM`, manually annotated PBM group assignement, 3) `Cluster`, computationally assigned clusters from the analysis in step 4.
 
+Important: The rows in 5-Input.txt must be in exactly the same order as the PWM columns in Merged PWMs.txt, after the first two columns have been removed. The script currently uses the row order to associate annotations with motifs; it does not match entries using the PWM column.
+
 **Output:**
 The script generates a JPEG figure named according to the selected group type: `tsne_plot_by_sample_PBM.jpeg` or `tsne_plot_by_sample_Cluster.jpeg`
 
