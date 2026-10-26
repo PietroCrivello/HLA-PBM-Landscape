@@ -48,10 +48,9 @@ The script uses the R packages future and furrr to process multiple input files 
 
 Before running the scripts, update the input and output directory paths in 2_Run_MODEC.R to match your local environment. Ensure that the MoDec executable is accessible to the script.
 
+## Class II: PBM_clustering
 
-## Class I: PBM_clustering
-
-This workflow combines position weight matrices (PWMs) describing the PBM of each class I allotype, performs hierarchical clustering based on motif similarity, and visualizes the relationships between allotypes and their PBM.
+This workflow combines position weight matrices (PWMs) describing the PBM of each class II allotype, performs hierarchical clustering based on motif similarity, and visualizes the relationships between allotypes and their PBM.
 
 ### Workflow
 
@@ -62,7 +61,7 @@ This workflow combines position weight matrices (PWMs) describing the PBM of eac
 This script imports individual motif files and combines their position-specific values into a single matrix, with one column per selected allotype.
 
 **Input:**
-- `3_Input.txt`. A tab-delimited file containing two columns `Folder` and `Name` reporting the path to the directory containing the motif files generated in step 2, and the corresponding allotype name (matching the file name, without .txt extension).
+- `3_Input.txt`. A tab-delimited file containing four columns for: 1) `Folder` with the output of MoDec, 2) `i` and `k` indeces to identify the PWM to be included in the analysis, 3) `Name` with the corresponding allotype name (matching the file name, without .txt extension).
 - Individual motif files named Name.txt within the corresponding folder.
 
 **Output:**
