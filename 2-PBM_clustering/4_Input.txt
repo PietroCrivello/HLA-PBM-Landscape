@@ -1,2 +1,0 @@
-PWM	Group	Name
-e.g. DRB1_01_01_1	1	e.g. DRB1_01_01

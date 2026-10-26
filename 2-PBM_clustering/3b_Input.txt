@@ -1,2 +1,0 @@
-Folder	Name
-Path to PWM folder	e.g. DRB1_01_01_1
