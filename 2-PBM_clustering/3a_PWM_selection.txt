@@ -1,0 +1,2 @@
+ID	MoDec_output	N_of_motifs	Selected_for_analysis
+e.g. DRB1_01_01_1	name matching the MoDec output	1	1
