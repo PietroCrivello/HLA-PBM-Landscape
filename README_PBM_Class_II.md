@@ -147,7 +147,7 @@ Note: The script uses N_of_motifs to determine which output file to retrieve. Th
 
 `6b_Merging_peptide_lists.R`
 
-This script extracts and merges peptide sequences from the MoDec output files generated in step 1, and corresponding to the manually selected motifs recorded in the Step 3a input table. For each allotype, sequences are retained according to their motif assignment in the Motif_1st column. The extracted sequences are grouped according to a string derived from their ID (string length set to 10, to be adjusted for longer ID) and combined into a single tab-delimited table.
+This script extracts and merges peptide sequences from the MoDec output files generated in step 2, and corresponding to the manually selected motifs recorded in the Step 3a input table. For each allotype, sequences are retained according to their motif assignment in the Motif_1st column. The extracted sequences are grouped according to a string derived from their ID (string length set to 10, to be adjusted for longer ID) and combined into a single tab-delimited table.
 
 **Input:**
 - `3a_PWM_selection.txt`
