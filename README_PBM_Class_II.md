@@ -124,7 +124,7 @@ Important: The rows in 5-Input.txt must be in exactly the same order as the PWM 
 **Output:**
 The script generates a JPEG and SVG figures named according to the selected group type.
 
-## Class I: Immunopeptidome overlap
+## Class II: Immunopeptidome overlap
 
 This workflow uses the peptide analysis performed with mixMHCp (Step 2) to retrieve peptide lists and compare immunopeptidome across allotypes. The first script merges the peptide lists, while the second script performs pairwise overlap comparisons.
 
