@@ -37,7 +37,7 @@ This script runs MoDec v1.2 on the allele-specific peptide lists generated in St
 --makeReport: requests report generation.
 --outAdd: enables the corresponding MoDec output option.
 
-**Input:**
+**Output:**
 - MODEC output files saved in the specified output directories. The output filename is based on the input filename, with _output.txt appended to its basename.
 
 **Parallel processing:** 
@@ -54,18 +54,34 @@ This workflow combines position weight matrices (PWMs) describing the PBM of eac
 
 ### Workflow
 
-**Step 3. Merging PWM**
+**Step 3a. Collecting selected PWM**
 
-`3_Merging_of_PWMs.R`
+`3a_Collect_selected_PWMs.R`
+
+This script collects selected PWMs from MoDec output folders for HLA class II heterodimers. The input table is generated following manual review of the MoDec outputs and specifies the motifs selected for downstream analysis.
+
+For each row, the script uses the column `MoDec_output`, and the `N of motifs` (K), and the selected motif index (i) to identify the corresponding PWM file. It copies the file to a dedicated output directory and renames it using the corresponding ID from the input table.
+
+**Input:**
+
+- `3a_PWM_selection.txt`: A tab-delimited table generated after manual inspection of the MoDec outputs, and containing the following columns: 1) `ID`: identifier used to name the extracted PWM file, 2) `MoDec_output`: identifies the corresponding MoDec output folder, 3) `N_of_motifs`: corresponding to the parameter K included in the MoDec analysis, 4) `Selected_for_analysis`: reporting the selected index (i) of the PWM.
+
+**Output:**
+
+- A directory containing the selected PWM files, named according to the ID column in the input file. The output directory is specified by the output_folder variable in the script.
+
+**Step 3b. Merging PWM**
+
+`3b_Merging_of_PWMs.R`
 
 This script imports individual motif files and combines their position-specific values into a single matrix, with one column per selected allotype.
 
 **Input:**
-- `3_Input.txt`. A tab-delimited file containing four columns for: 1) `Folder` with the output of MoDec, 2) `i` and `k` indeces to identify the PWM to be included in the analysis, 3) `Name` with the corresponding allotype name (matching the file name, without .txt extension).
+- `3b_Input.txt`. A tab-delimited file containing the following columns: 1) `Folder` with the path to the folder containing the selected PWM files, 2) `Name` with the name of the selected PWM file (without .txt extension). This correspond to the `ID` column from the previous input in Step 3a.
 - Individual motif files named Name.txt within the corresponding folder.
 
 **Output:**
-- `Merged PWMs.txt`. A tab-delimited matrix containing the amino-acid position and symbol in the first two columns, followed by one column for each motif reporting the amino acid frequencies.
+- `Merged PWMs.txt`. A tab-delimited matrix containing the amino-acid position and symbol in the first two columns, followed by one column for each selected PWM containing the corresponding position-specific values.
 
 **Step 4. Perform Hierarchical clustering**
 
