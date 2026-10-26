@@ -1,0 +1,2 @@
+PWM	PBM	Cluster
+e.g. DRB1_01_01	1	1
